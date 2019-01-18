@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import './App.scss';
+import classes from './App.scss';
+import Main from './modules/main/main';
 
 class App extends Component {
+
   render() {
     return (
-      <div>
-        sss
+      <div className={classes.container}>
+          <Main/>
       </div>
     );
   }
