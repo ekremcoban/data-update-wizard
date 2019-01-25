@@ -1,0 +1,135 @@
+@import "../../sass/abstracts/variables";
+
+.select {
+    // background-color: blue;
+    grid-column: 2 / 11;
+    grid-row: 2 / 3;
+
+    display: grid;
+
+}
+.home {
+    // background-color: red;
+
+    display: grid;
+    grid-template-columns: repeat(11, minmax(2rem, 1fr));
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-column-gap: $gap;
+
+    &__a__logo {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        margin-top: 2rem;
+    }
+
+    &__a__novifarm {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        margin-top: 2rem;
+    }
+
+    &__a__novifarm__1 {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        margin-top: 2rem;
+    }
+
+    @media only screen and (max-width: 1320px) {
+        .home {
+            // grid-template-rows: 1fr 3fr 1fr;
+
+            &__a__logo {
+                grid-column: 2 / 4;
+                grid-row: 1 / 2;
+                margin-top: 1rem;
+            }
+        
+            &__a__novifarm {
+                grid-column: 4 / 6;
+                grid-row: 1 / 2;
+                margin-top: 1rem;
+            }
+
+            &__a__novifarm__1 {
+                grid-column: 2 / 4;
+                grid-row: 1 / 2;
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        &__a__logo {
+            height: 50%;
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+    
+        &__a__novifarm {
+            height: 50%;
+            grid-column: 4 / 6;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+
+        &__a__novifarm__1 {
+            height: 50%;
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+    }
+
+    @media only screen and (max-width:600px) {
+        &__a__logo {
+            grid-column: 2 / 5;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+    
+        &__a__novifarm {
+            grid-column: 5 / 8;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+
+        &__a__novifarm__1 {
+            grid-column: 2 / 5;
+            grid-row: 1 / 2;
+            margin-top: 3rem;
+        }
+    }
+    //     grid-column: 1 / 3;
+
+    //     display: grid;
+    //     grid-template-columns: repeat(4, minmax(6rem, 1fr));
+    //     grid-template-rows: 1fr 1fr 1fr;
+
+    //     &__a__logo {
+    //         grid-column: 2 / 3;
+    //         grid-row: 1 / 3;
+    //         margin-top: 3rem;
+    //     }
+    
+    //     &__a__novifarm {
+    //         grid-column: 3 / 4;
+    //         grid-row: 1 / 3;
+    //         margin-top: 3rem;
+    //     }
+    // }
+}
+
+.img__logo {
+    width: 100%;
+    border: .13rem;
+    border-style: dashed;
+    border-color: red;
+}
+
+.img__novifarm {
+    width: 100%;
+    border: .13rem;
+    border-style: dashed;
+    border-color: #2980b9;
+}

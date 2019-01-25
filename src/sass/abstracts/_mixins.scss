@@ -6,11 +6,11 @@
     }
 }
 
-@mixin col_1_of_2 {
-    width: calc((100% - #{$gutter-horizontal}) / 2);
-    float: left;
+// @mixin col_1_of_2 {
+//     width: calc((100% - #{$gutter-horizontal}) / 2);
+//     float: left;
 
-    &:not(:last-child) {
-        margin-right: $gutter-horizontal;
-    }
+//     &:not(:last-child) {
+//         margin-right: $gutter-horizontal;
+//     }
 }

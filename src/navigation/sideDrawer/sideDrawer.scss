@@ -1,0 +1,128 @@
+@import "../../sass/abstracts/variables";
+
+.sideDrawer {
+    grid-column: 1 / 2;
+    grid-row: 1 / 11;
+
+    display: grid;
+    grid-template-rows: repeat(10, minmax(2rem, 1fr));
+
+    // background-color: $color-grey-light-2;
+    transition: transform 0.3s ease-out;
+
+    &__firstRow {
+        grid-row: 4 / 5;
+    }
+
+    &__secondRow {
+        grid-row: 5 / 6;
+    }
+
+    &__thirdRow {
+        grid-row: 6 / 7;
+    }
+
+    &__fourthRow {
+        grid-row: 7 / 8;
+    }
+}
+
+.button {
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    transition: all 0.5s;
+    cursor: pointer;
+    background-color: $color-grey-light-1;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+
+
+.open {
+    transform: translateX(0);
+}
+
+.close {
+    transform: translateX(-100%);
+}
+
+.firstRow {
+    grid-row: 3 / 4;
+}
+
+@media only screen and (max-width: 1060px) {
+    .sideDrawer {
+        font-size: .85rem;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .sideDrawer {
+        grid-column: 1 / 7;
+        grid-row: 1 / 4;
+    
+        display: grid;
+        grid-template-rows: repeat(10, 1fr);
+        // grid-template-rows: 1fr;
+    
+        // background-color: $color-grey-light-2;
+        transition: transform 0.3s ease-out;
+    
+        &__firstRow {
+            grid-row: 4 / 5;
+            grid-column: 1 / 2;
+        }
+    
+        &__secondRow {
+            grid-row: 4 / 5;
+            grid-column: 2 / 3;
+        }
+    
+        &__thirdRow {
+            grid-row: 4 / 5;
+            grid-column: 3 / 4;
+        }
+    
+        &__fourthRow {
+            grid-row: 4 / 5;
+            grid-column: 4 / 5;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .sideDrawer {
+        grid-column: 1 / 7;
+        grid-row: 1 / 5;
+    
+        display: grid;
+        grid-template-rows: repeat(10, 1fr);
+        // grid-template-rows: 1fr;
+    
+    }
+}

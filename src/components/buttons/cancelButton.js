@@ -1,9 +1,10 @@
 import React from "react";
 import classes from './cancelButton.scss';
 
-const cancelButton = () => {
+const cancelButton = (props) => {
+
     return (
-        <button className={classes.btn}>İptal</button>
+        <button onClick={props.click} className={classes.btn}>İptal</button>
     );
 };
 
