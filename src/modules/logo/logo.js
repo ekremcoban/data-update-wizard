@@ -5,31 +5,67 @@ import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
 import SearchButton from "../../components/buttons/searchButton";
 import UpdateButton from "../../components/buttons/updateButton";
 import CancelButton from "../../components/buttons/cancelButton";
+import Modal from "../../components/modal/modal";
 import axios from '../../axios-orders';
 
+let status, receiptNumberBlocked, receiptNumber;
 class logo extends Component {
-       state = {
-            firmId: 10,
-            receiptNumber: null,
-            receiptNumberBlocked: null,
-            status: null
-        }
-    
-    postSearchButton = () => {
+    state = {
+        data: null,
+        firmId: 0,
+        receiptNumber: null,
+        receiptNumberBlocked: null,
+        status: null,
+        loading: false,
+        error: false
+    }
+
+    postSearchButton = async () => {
         const post = {
-            firmId: 31,
-            //eFaturaStatus: 0,
-            ficheNo: "SEF2017000006439"
+            firmId: this.state.firmId, //  31,
+            ficheNo: this.state.receiptNumber //"SEF2017000006439"
         };
-        axios.get('/logo/getinvoicestatus', {
-            params: post
+        await axios.put('/logo/getinvoicestatus', post)
+            .then(async response => {
+                // console.log(response);
+                this.setState({
+                    data: response.data,
+                    loading: true,
+                    error: false
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    error: true
+                });
+                status = null;
+            });
+
+        if (this.state.loading && !this.state.error) {
+            this.setState({
+                status,
+                receiptNumberBlocked,
+                receiptNumber
+            });
+        } else if (this.state.loading && this.state.error) {
+            this.setState({
+                status: "",
+                receiptNumberBlocked: ""
+            });
+        }
+
+        // console.log(this.state.status)
+    }
+
+
+    cancelButton = () => {
+        this.setState({
+            receiptNumber: "",
+            receiptNumberBlocked: "",
+            status: "",
+            error: false
         })
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.log(err);
-        });
     }
 
     optionChangedHandler = (event) => {
@@ -44,21 +80,28 @@ class logo extends Component {
         });
     }
 
-    receiptNumberBlockedChangedHandler = (receive) => {
+    statusChancedHandler = (event) => {
         this.setState({
-            receiptNumberBlocked: receive
-        });
-    }
-
-    statusChangedHandler = (receive) => {
-        this.setState({
-            status: receive
+            status: event.target.value
         });
     }
 
     render() {
+        let dataOfFirms;
+        if (this.state.loading && !this.state.error) {
+            dataOfFirms = this.state.data.map(firm => {
+                status = firm.eFaturaStatus;
+                receiptNumberBlocked = firm.ficheNo;
+            })
+        }
+        else if (this.state.loading && this.state.error) {
+            status = null;
+            receiptNumberBlocked = null;
+        }
+
         return (
             <div className={classes.logo}>
+                {this.state.error && this.state.receiptNumber !== null ? <Modal click={this.cancelButton} /> : null}
                 <div className={classes.logo__section_about}>
                     <div className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>
@@ -68,15 +111,16 @@ class logo extends Component {
                 </div>
                 <div className={classes.logo__item__1}>
                     <Options optionChangedHandler={this.optionChangedHandler} />
-                    {this.state.firmId}
                 </div>
                 <div className={classes.logo__item__2}>
-                    <ReceiptNoInputText 
-                        placeholder="Fiş Numarasını Giriniz" 
-                        changed={this.receiptNumberChancedHandler} />
+                    <ReceiptNoInputText
+                        placeholder="Fiş Numarasını Giriniz"
+                        changed={this.receiptNumberChancedHandler}
+                        receiptNumber={this.state.receiptNumber}
+                        delete={this.state.delete} />
                 </div>
                 <div className={classes.logo__item__3}>
-                    <SearchButton  click={this.postSearchButton} />
+                    <SearchButton click={this.postSearchButton} />
                 </div>
                 <div className={classes.logo__item__4}>
                     <span>Fiş No:</span>
@@ -85,17 +129,19 @@ class logo extends Component {
                     <span>Status:</span>
                 </div>
                 <div className={classes.logo__item__7}>
-                    <ReceiptNoInputText 
+                    <ReceiptNoInputText
                         disabled="true"
-                        receiptNumberBlocked={this.receiptNumberBlockedChangedHandler} />
+                        receiptNumberBlocked={this.state.receiptNumberBlocked} />
                 </div>
                 <div className={classes.logo__item__8}>
                     <ReceiptNoInputText
-                        status={this.statusChangedHandler} />
+                        status={this.state.status}
+                        changed={this.statusChancedHandler} />
                 </div>
                 <div className={classes.logo__item__9}>
-                    <CancelButton /><UpdateButton />
-                </div>
+                    <CancelButton click={this.cancelButton} />
+                    <UpdateButton/>
+                </div>{this.state.error}
             </div>
         );
     }

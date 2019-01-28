@@ -19,7 +19,7 @@ class optionsFirms extends Component {
                     firmNames: response.data,
                     loading: false
                 }); 
-                console.log(this.state.firmNames);
+                // console.log(this.state.firmNames);
             }).catch(err => {
                 this.setState({ loading: false });
             });
