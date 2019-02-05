@@ -1,5 +1,8 @@
 import "@babel/polyfill";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 267dc0ff5d3badd2867d6a50e317ec9f9b246c8d
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';

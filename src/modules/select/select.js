@@ -19,14 +19,16 @@ class select extends Component {
     };
 
     componentDidMount() {
-        axios.get('/auth/getuserroles')
+        axios
+            .get("/auth/getuserroles")
             //axios.get('/posts')
             .then(response => {
                 this.setState({
                     firms: response.data,
                     loading: false
-                })
-            }).catch(err => {
+                });
+            })
+            .catch(err => {
                 this.setState({ loading: false });
             });
     }
@@ -41,14 +43,31 @@ class select extends Component {
         if (this.state.firms.length === 2) {
             selectedFirm = (
                 <div className={classes.home}>
-                    <Redirect to="/logo"></Redirect>
-                    <Link className={classes.home__a__logo} to={{
-                        pathname: '/logo'
-                    }}><img src={LogoPicture} alt="Logo" className={classes.img__logo}></img></Link>
+                    {/* <Redirect to="/logo" /> */}
+                    <Link
+                        className={classes.home__a__logo}
+                        to={{
+                            pathname: "/logo"
+                        }}
+                    >
+                        <img
+                            src={LogoPicture}
+                            alt="Logo"
+                            className={classes.img__logo}
+                        />
+                    </Link>
 
-                    <Link className={classes.home__a__novifarm} to={{
-                        pathname: '/novifarm'
-                    }}><img src={NoviFarmPicture} alt="Novi farm" className={classes.img__novifarm}></img>
+                    <Link
+                        className={classes.home__a__novifarm}
+                        to={{
+                            pathname: "/novifarm"
+                        }}
+                    >
+                        <img
+                            src={NoviFarmPicture}
+                            alt="Novi farm"
+                            className={classes.img__novifarm}
+                        />
                     </Link>
 
                     <Switch>
@@ -56,38 +75,84 @@ class select extends Component {
                         <Route path="/novifarm" exact component={Novifarm} />
                         <Route path="/satisfis" exact component={SatisFis} />
                         <Route path="/stokfis" exact component={StokFis} />
-                        <Route path="/yemtuketim" exact component={YemTuketim} />
-                        <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route
+                            path="/yemtuketim"
+                            exact
+                            component={YemTuketim}
+                        />
+                        <Route
+                            path="/hayvankarti"
+                            exact
+                            component={HayvanKarti}
+                        />
+                        <Route
+                            path="/"
+                            exact
+                            render={() => <Redirect to="/logo" />}
+                        />
                     </Switch>
                 </div>
             );
-        }
-        else if (roleId === 1) {
+        } else if (roleId === 1) {
             selectedFirm = (
                 <div className={classes.home}>
-                    <Redirect to="/logo"></Redirect>
-                    <Link className={classes.home__a__logo} to={{
-                        pathname: '/logo'
-                    }}><img src={LogoPicture} alt="Logo" className={classes.img__logo}></img></Link>
+                    {/* <Redirect to="/logo" /> */}
+                    <Link
+                        className={classes.home__a__logo}
+                        to={{
+                            pathname: "/logo"
+                        }}
+                    >
+                        <img
+                            src={LogoPicture}
+                            alt="Logo"
+                            className={classes.img__logo}
+                        />
+                    </Link>
 
                     <Route path="/logo" exact component={Logo} />
+                    <Route
+                            path="/"
+                            exact
+                            render={() => <Redirect to="/logo" />}
+                        />
                 </div>
             );
-        }
-        else if (roleId === 2) {
+        } else if (roleId === 2) {
             selectedFirm = (
                 <div className={classes.home}>
-                    <Redirect to="/novifarm"></Redirect>
-                    <Link className={classes.home__a__novifarm__1} to={{
-                        pathname: '/novifarm'
-                    }}><img src={NoviFarmPicture} alt="Novi farm" className={classes.img__novifarm}></img>
+                    {/* <Redirect to="/novifarm" /> */}
+                    <Link
+                        className={classes.home__a__novifarm__1}
+                        to={{
+                            pathname: "/novifarm"
+                        }}
+                    >
+                        <img
+                            src={NoviFarmPicture}
+                            alt="Novi farm"
+                            className={classes.img__novifarm}
+                        />
                     </Link>
                     <Switch>
                         <Route path="/novifarm" exact component={Novifarm} />
                         <Route path="/satisfis" exact component={SatisFis} />
                         <Route path="/stokfis" exact component={StokFis} />
-                        <Route path="/yemtuketim" exact component={YemTuketim} />
-                        <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route
+                            path="/yemtuketim"
+                            exact
+                            component={YemTuketim}
+                        />
+                        <Route
+                            path="/hayvankarti"
+                            exact
+                            component={HayvanKarti}
+                        />
+                        <Route
+                            path="/"
+                            exact
+                            render={() => <Redirect to="/novifarm" />}
+                        />
                     </Switch>
                 </div>
             );
@@ -97,12 +162,8 @@ class select extends Component {
             selectedFirm = null;
         }
 
-        return (
-            <div className={classes.select}>
-                {selectedFirm}
-            </div>
-        );
-    };
-};
+        return <div className={classes.select}>{selectedFirm}</div>;
+    }
+}
 
 export default select;
