@@ -6,7 +6,7 @@ import SearchButton from "../../components/buttons/searchButton";
 import UpdateButton from "../../components/buttons/updateButton";
 import CancelButton from "../../components/buttons/cancelButton";
 import SideDrawer from "../../navigation/sideDrawer/sideDrawer";
-import Modal from "../../components/modal/modal";
+import ModalCancel from "../../components/modalCancel/modalCancel";
 import axios from '../../axios-orders';
 
 let status, receiptNumberBlocked, receiptNumber;
@@ -101,7 +101,8 @@ class novi extends Component {
 
         return (
             <div className={classes.novi}>
-                {this.state.error && this.state.receiptNumber !== null ? <Modal click={this.cancelButton} /> : null}
+                {this.state.error && this.state.receiptNumber !== null ? 
+                    <ModalCancel click={this.cancelButton} >Aradığınız Numaralı Kayıt Bulunamadı!</ModalCancel> : null}
                 <div className={classes.novi__section_about}>
                     <div className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>

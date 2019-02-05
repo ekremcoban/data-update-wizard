@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./updateButton.scss";
 
-const updateButton = () => {
+const updateButton = (props) => {
     return (
-        <button className={classes.btn}>Güncelle</button>
+        <button onClick={props.click} className={classes.btn}>Güncelle</button>
     );
 };
 

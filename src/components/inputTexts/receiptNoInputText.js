@@ -25,6 +25,14 @@ const ff = (props) => {
         </input>;
     }
 
+    // if (!props.placeholder) {
+    //     receiptNo = <input type="text"
+    //         className={classes.input_text}
+    //         onChange={props.changed}
+    //         value={props.receiptNumber}>
+    //     </input>;
+    // }
+
     return (
         <div>
             {receiptNo}

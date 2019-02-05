@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import classes from './satisFis.scss';
 
 import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
+
 import SearchButton from "../../components/buttons/searchButton";
 import CancelButton from "../../components/buttons/cancelButton";
 import UpdateButton from "../../components/buttons/updateButton";
-import Modal from "../../components/modal/modal";
+
+import ModalCancel from "../../components/modalCancel/modalCancel";
+import ModalSuccess from "../../components/modalSuccess/modalSuccess";
+import ModalUnSuccess from "../../components/modalUnSuccess/modalUnSuccess";
+
 import axios from '../../axios-orders';
 
 let receiptNumber, receiptNumberBlocked, integrationState, integration;
@@ -17,7 +22,9 @@ class satisFis extends Component {
         integrationState: null,
         integration: null,
         loading: false,
-        error: false
+        error: false,
+        updateButtonSuccess: false,
+        updateButtonError: false
     }
 
     postSearchButton = async () => {
@@ -26,7 +33,7 @@ class satisFis extends Component {
         };
         await axios.put('/novifarm/getsatisfis', post)
             .then(async response => {
-                console.log(response);
+                //console.log(response);
                 this.setState({
                     data: response.data,
                     loading: true,
@@ -42,22 +49,47 @@ class satisFis extends Component {
                 integration = null;
             });
 
-            if (this.state.loading && !this.state.error) {
-                this.setState({
-                    receiptNumber,
-                    receiptNumberBlocked,
-                    integrationState,
-                    integration
-                });
-            } else if (this.state.loading && this.state.error) {
-                this.setState({
-                    receiptNumberBlocked: "",
-                    integrationState: "",
-                    integration: ""
-                });
-            }
-        
+        if (this.state.loading && !this.state.error) {
+            this.setState({
+                receiptNumber,
+                receiptNumberBlocked,
+                integrationState,
+                integration
+            });
+        } else if (this.state.loading && this.state.error) {
+            this.setState({
+                receiptNumberBlocked: "",
+                integrationState: "",
+                integration: ""
+            });
+        }
+
         // console.log(this.state.status)
+    }
+
+    updateDataButton = async () => {
+        const post = {
+            fisNo: this.state.receiptNumberBlocked,
+            integration: this.state.integration,
+            integrationState: this.state.integrationState
+        };
+
+        await axios.put('/novifarm/updatesatisfis', post)
+            .then(async res => {
+                this.setState({
+                    error: false,
+                    updateButtonSuccess: true
+                });
+                return res;
+            })
+            .catch(err => {
+                console.log(err)
+                this.setState({
+                    error: true,
+                    updateButtonError: true
+                });
+                console.log(err)
+            });
     }
 
     cancelButton = () => {
@@ -67,6 +99,18 @@ class satisFis extends Component {
             integrationState: "",
             integration: "",
             error: false
+        })
+    }
+
+    successButton = () => {
+        this.setState({
+            receiptNumber: "",
+            receiptNumberBlocked: "",
+            integrationState: "",
+            integration: "",
+            error: false, 
+            updateButtonSuccess: false,
+            updateButtonError: false
         })
     }
 
@@ -104,7 +148,13 @@ class satisFis extends Component {
 
         return (
             <div className={classes.satisFis}>
-            {this.state.error && this.state.receiptNumber !== null ? <Modal click={this.cancelButton} /> : null}
+                {this.state.error && this.state.receiptNumber !== null 
+                && !this.state.updateButtonError && !this.state.updateButtonSuccess ?
+                    <ModalCancel click={this.cancelButton} >Aradığınız Numaralı Kayıt Bulunamadı!</ModalCancel> : null}
+                {!this.state.error && this.state.updateButtonSuccess ? 
+                    <ModalSuccess click={this.successButton}>Güncelleme Başarılı</ModalSuccess> : null}
+                {this.state.error && this.state.updateButtonError ? 
+                    <ModalUnSuccess click={this.successButton}>Güncelleme Başarısız</ModalUnSuccess> : null}
                 <div className={classes.satisFis__section_about}>
                     <div className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>
@@ -148,7 +198,7 @@ class satisFis extends Component {
                 </div>
                 <div className={classes.satisFis__item__9}>
                     <CancelButton click={this.cancelButton} />
-                    <UpdateButton />
+                    <UpdateButton click={this.updateDataButton} />
                 </div>
             </div>
         );
