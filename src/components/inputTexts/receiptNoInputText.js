@@ -2,12 +2,22 @@ import React from "react";
 import classes from './receiptNoInputText.scss';
 
 const ff = (props) => {
-    let receiptNo = <input type="text" 
+    let receiptNo = null;
+    if (props.status) {
+        receiptNo = <input type="text" 
         className={classes.input_text}
         onChange={props.changed}
         value={props.status} ></input>;
+    }
+    if (!props.status) {
+        receiptNo = <input type="text" 
+        className={classes.input_text}
+        onChange={props.changed}
+        value="" ></input>;
+    }
+    
 
-    if (props.disabled) {
+    if (props.disabled && props.receiptNumber) {
         receiptNo = <input type="text" 
             className={`${classes.input_text} ${classes.input_text__disabled}`} 
             onChange={props.changed}
@@ -15,13 +25,30 @@ const ff = (props) => {
             disabled>
         </input>
     }
+    if (props.disabled && !props.receiptNumber) {
+        receiptNo = <input type="text" 
+            className={`${classes.input_text} ${classes.input_text__disabled}`} 
+            onChange={props.changed}
+            value=""
+            disabled>
+        </input>
+    }
 
-    if (props.placeholder) {
+    if (props.placeholder && props.receiptNumber) {
         receiptNo = <input type="text"
             className={classes.input_text}
             placeholder={props.placeholder}
             onChange={props.changed}
             value={props.receiptNumber}>
+        </input>;
+    }
+
+    if (props.placeholder && !props.receiptNumber) {
+        receiptNo = <input type="text"
+            className={classes.input_text}
+            placeholder={props.placeholder}
+            onChange={props.changed}
+            value="">
         </input>;
     }
 
