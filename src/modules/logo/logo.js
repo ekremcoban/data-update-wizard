@@ -18,9 +18,9 @@ class logo extends Component {
     state = {
         data: null,
         firmId: 0,
-        receiptNumber: null,
-        receiptNumberBlocked: null,
-        status: null,
+        receiptNumber: "",
+        receiptNumberBlocked: "",
+        status: "",
         loading: false,
         error: false,
         updateButtonSuccess: false,
@@ -131,9 +131,11 @@ class logo extends Component {
     render() {
         let dataOfFirms;
         if (this.state.loading && !this.state.error) {
-            dataOfFirms = this.state.data.map(firm => {
-                status = firm.eFaturaStatus;
-                receiptNumberBlocked = firm.ficheNo;
+            dataOfFirms = this.state.data.map(firm =>  {
+                
+                    status = firm.eFaturaStatus;
+                    receiptNumberBlocked = firm.ficheNo;
+                // return {}
             })
         }
         else if (this.state.loading && this.state.error) {

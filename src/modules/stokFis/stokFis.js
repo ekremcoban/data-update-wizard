@@ -17,7 +17,7 @@ let receiptNumber, receiptNumberBlocked, integrationState, integration;
 class stokFis extends Component {
     state = {
         data: null,
-        receiptNumber: null,
+        receiptNumber: "",
         receiptNumberBlocked: null,
         integrationState: null,
         integration: null,
