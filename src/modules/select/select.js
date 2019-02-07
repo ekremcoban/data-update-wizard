@@ -39,7 +39,7 @@ class select extends Component {
 
         if (this.state.firms.length === 2) {
             selectedFirm = (
-                <div className={classes.home}>
+                <div key="1" className={classes.home}>
                     {/* <Redirect to="/logo" /> */}
                     <NavLink
                         className={classes.home__a__logo}

@@ -1,4 +1,3 @@
-import QueueAnim from 'rc-queue-anim';
 import React, { Component } from 'react';
 import classes from './logo.scss';
 import Options from "../../components/options/options-firms";

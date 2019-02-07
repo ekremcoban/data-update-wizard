@@ -8,3 +8,10 @@
                            [center-end] minmax(1rem, 1fr) [full-end];
 }
 
+.sutas {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  display: grid;
+
+}
