@@ -1,4 +1,6 @@
 .container {
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url("./assets/sutas.jpg");
+  background-size: cover;
   display: grid;
   grid-template-rows: 10vh 80vh min-content 10vh min-content;
   grid-template-columns: [full-start] minmax(1rem, 1fr) [input-start] minmax(5rem, 1fr) 
@@ -6,12 +8,3 @@
                            [center-end] minmax(1rem, 1fr) [full-end];
 }
 
-@media only screen and (max-width: 1320px) {
-  .container {
-    display: grid;
-    grid-template-rows: 1vh 80vh min-content 1vh min-content;
-    grid-template-columns: [full-start] minmax(1rem, 1fr) [input-start] minmax(5rem, 1fr) 
-                             [input-end center-start] repeat(8, [col-start] minmax(1rem, 1fr) [col-end]) 
-                             [center-end] minmax(1rem, 1fr) [full-end];
-  }
-}

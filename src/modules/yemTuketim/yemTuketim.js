@@ -121,10 +121,9 @@ class yemTuketim extends Component {
 
     render() {
         if (this.state.loading && !this.state.error) {
-            let dataOfFirms = this.state.data.map(firm => {
-                receiptNumberBlocked = firm.fisNo;
-                integrationState = firm.integrationState;
-            })
+            receiptNumberBlocked = this.state.data[0].fisNo;
+            integrationState = this.state.data[0].integrationState;
+         
         }
         else if (this.state.loading && this.state.error) {
             receiptNumberBlocked = null;

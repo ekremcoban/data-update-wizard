@@ -2,7 +2,8 @@
 @import "../../sass/layout/header";
 
 .logo {
-    background-color: $color-background;
+    background-image: linear-gradient(to top right, rgba($color-background, 0), rgba($color-background, .8));
+    // background-color: $color-background;
     grid-column: 2 / 11;
     grid-row: 2 / 3;
 

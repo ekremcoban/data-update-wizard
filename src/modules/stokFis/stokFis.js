@@ -167,11 +167,9 @@ class stokFis extends Component {
 
     render() {
         if (this.state.loading && !this.state.error) {
-            let dataOfFirms = this.state.data.map(firm => {
-                receiptNumberBlocked = firm.fisNo;
-                integrationState = firm.integrationState;
-                integration = firm.integration;
-            })
+            receiptNumberBlocked = this.state.data[0].fisNo;
+            integrationState = this.state.data[0].integrationState;
+            integration = this.state.data[0].integration;      
         }
         else if (this.state.loading && this.state.error) {
             receiptNumberBlocked = null;

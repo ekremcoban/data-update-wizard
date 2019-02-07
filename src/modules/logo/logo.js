@@ -1,3 +1,4 @@
+import QueueAnim from 'rc-queue-anim';
 import React, { Component } from 'react';
 import classes from './logo.scss';
 import Options from "../../components/options/options-firms";
@@ -129,14 +130,9 @@ class logo extends Component {
     }
 
     render() {
-        let dataOfFirms;
         if (this.state.loading && !this.state.error) {
-            dataOfFirms = this.state.data.map(firm =>  {
-                
-                    status = firm.eFaturaStatus;
-                    receiptNumberBlocked = firm.ficheNo;
-                // return {}
-            })
+            status = this.state.data[0].eFaturaStatus;
+            receiptNumberBlocked = this.state.data[0].ficheNo;   
         }
         else if (this.state.loading && this.state.error) {
             status = null;
@@ -153,7 +149,7 @@ class logo extends Component {
                 {this.state.error && this.state.updateButtonError ? 
                     <ModalUnSuccess click={this.successButton}>Güncelleme Başarısız</ModalUnSuccess> : null}
                 <div className={classes.logo__section_about}>
-                    <div className={classes.u_center_text}>
+                    <div key="1" className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>
                             Logo Fatura Uygulaması
                         </h2>

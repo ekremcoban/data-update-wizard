@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./select.scss";
 import LogoPicture from "../../assets/logo.jpeg";
 import NoviFarmPicture from "../../assets/novifarm.png";
-import { Link, Route, Switch, Redirect } from "react-router-dom";
+import { NavLink, Link, Route, Switch, Redirect } from "react-router-dom";
 import axios from "../../axios-orders";
 
 import Logo from "../../modules/logo/logo";
@@ -35,17 +35,15 @@ class select extends Component {
 
     render() {
         let selectedFirm = null;
-        let roleId = 0;
-        const firms = this.state.firms.map(firm => {
-            roleId = firm.roleId;
-        });
+        let roleId = this.state.firms[0];
 
         if (this.state.firms.length === 2) {
             selectedFirm = (
                 <div className={classes.home}>
                     {/* <Redirect to="/logo" /> */}
-                    <Link
+                    <NavLink
                         className={classes.home__a__logo}
+                        activeClassName="active"
                         to={{
                             pathname: "/logo"
                         }}
@@ -55,7 +53,7 @@ class select extends Component {
                             alt="Logo"
                             className={classes.img__logo}
                         />
-                    </Link>
+                    </NavLink>
 
                     <Link
                         className={classes.home__a__novifarm}
@@ -75,20 +73,9 @@ class select extends Component {
                         <Route path="/novifarm" exact component={Novifarm} />
                         <Route path="/satisfis" exact component={SatisFis} />
                         <Route path="/stokfis" exact component={StokFis} />
-                        <Route
-                            path="/yemtuketim"
-                            exact
-                            component={YemTuketim}
-                        />
-                        <Route
-                            path="/hayvankarti"
-                            exact
-                            component={HayvanKarti}
-                        />
-                        <Route
-                            path="/"
-                            exact
-                            render={() => <Redirect to="/logo" />}
+                        <Route path="/yemtuketim" exact component={YemTuketim} />
+                        <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route path="/" exact render={() => <Redirect to="/logo" />} 
                         />
                     </Switch>
                 </div>
@@ -111,10 +98,7 @@ class select extends Component {
                     </Link>
 
                     <Route path="/logo" exact component={Logo} />
-                    <Route
-                            path="/"
-                            exact
-                            render={() => <Redirect to="/logo" />}
+                    <Route path="/" exact render={() => <Redirect to="/logo" />}
                         />
                 </div>
             );
@@ -138,20 +122,9 @@ class select extends Component {
                         <Route path="/novifarm" exact component={Novifarm} />
                         <Route path="/satisfis" exact component={SatisFis} />
                         <Route path="/stokfis" exact component={StokFis} />
-                        <Route
-                            path="/yemtuketim"
-                            exact
-                            component={YemTuketim}
-                        />
-                        <Route
-                            path="/hayvankarti"
-                            exact
-                            component={HayvanKarti}
-                        />
-                        <Route
-                            path="/"
-                            exact
-                            render={() => <Redirect to="/novifarm" />}
+                        <Route path="/yemtuketim" exact component={YemTuketim} />
+                        <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route path="/" exact render={() => <Redirect to="/novifarm" />}
                         />
                     </Switch>
                 </div>

@@ -13,7 +13,7 @@ import ModalUnSuccess from "../../components/modalUnSuccess/modalUnSuccess";
 
 import axios from '../../axios-orders';
 
-let earringNo, farm, shelter, padok, commercialSystemCode, insuranceState, policyNo, policyDate;
+let farm, shelter, padok, commercialSystemCode, insuranceState, policyNo, policyDate;
 class hayvanKarti extends Component {
     state = {
         data: null,
@@ -202,15 +202,13 @@ class hayvanKarti extends Component {
 
     render() {
         if (this.state.loading && !this.state.error) {
-            let dataOfFirms = this.state.data.map(firm => {
-                farm = firm.ciftlik;
-                shelter = firm.barinak;
-                padok = firm.padok;
-                commercialSystemCode = firm.ticariSistemKodu;
-                insuranceState = firm.sigortaDurumu;
-                policyNo = firm.policeNo;
-                policyDate = firm.policeTarihi;
-            })
+            farm = this.state.data[0].ciftlik;
+            shelter = this.state.data[0].barinak;
+            padok = this.state.data[0].padok;
+            commercialSystemCode = this.state.data[0].ticariSistemKodu;
+            insuranceState = this.state.data[0].sigortaDurumu;
+            policyNo = this.state.data[0].policeNo;
+            policyDate = this.state.data[0].policeTarihi;
         }
         else if (this.state.loading && this.state.error) {
             farm = null;

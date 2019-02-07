@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import classes from './novifarm.scss';
-import Options from "../../components/options/options-firms";
-import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
-import SearchButton from "../../components/buttons/searchButton";
-import UpdateButton from "../../components/buttons/updateButton";
-import CancelButton from "../../components/buttons/cancelButton";
-import SideDrawer from "../../navigation/sideDrawer/sideDrawer";
+// import Options from "../../components/options/options-firms";
+// import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
+// import SearchButton from "../../components/buttons/searchButton";
+// import UpdateButton from "../../components/buttons/updateButton";
+// import CancelButton from "../../components/buttons/cancelButton";
+// import SideDrawer from "../../navigation/sideDrawer/sideDrawer";
+import Card from "../../components/cards/card";
 import ModalCancel from "../../components/modalCancel/modalCancel";
+import { Link } from "react-router-dom";
 import axios from '../../axios-orders';
 
 let status, receiptNumberBlocked, receiptNumber;
@@ -87,12 +89,9 @@ class novi extends Component {
     }
 
     render() {
-        let dataOfFirms;
         if (this.state.loading && !this.state.error) {
-            dataOfFirms = this.state.data.map(firm => {
-                status = firm.eFaturaStatus;
-                receiptNumberBlocked = firm.ficheNo;
-            })
+            status = this.state.data[0].eFaturaStatus;
+            receiptNumberBlocked = this.state.data[0].ficheNo;
         }
         else if (this.state.loading && this.state.error) {
             status = null;
@@ -101,7 +100,7 @@ class novi extends Component {
 
         return (
             <div className={classes.novi}>
-                {this.state.error && this.state.receiptNumber !== null ? 
+                {this.state.error && this.state.receiptNumber !== null ?
                     <ModalCancel click={this.cancelButton} >Aradığınız Numaralı Kayıt Bulunamadı!</ModalCancel> : null}
                 <div className={classes.novi__section_about}>
                     <div className={classes.u_center_text}>
@@ -110,8 +109,8 @@ class novi extends Component {
                         </h2>
                     </div>
                 </div>
-                <SideDrawer />
-                <div className={classes.novi__item__1}>
+                {/* <SideDrawer /> */}
+                {/* <div className={classes.novi__item__1}>
                     <Options optionChangedHandler={this.optionChangedHandler} />
                 </div>
                 <div className={classes.novi__item__2}>
@@ -146,7 +145,36 @@ class novi extends Component {
                 <div className={classes.novi__item__9}>
                     <CancelButton click={this.cancelButton} />
                     <UpdateButton />
+                </div> */}
+
+                 <div className={classes.novi__item__1}>
+                    <Link to={{
+                        pathname: '/satisfis'
+                    }}>
+                        <Card>Satış Fiş</Card>
+                    </Link>
                 </div>
+                <div className={classes.novi__item__2}>
+                <Link to={{
+                        pathname: '/stokfis'
+                    }}>
+                        <Card>Stok Fiş</Card>
+                    </Link>
+                </div>
+                <div className={classes.novi__item__3}>
+                <Link to={{
+                        pathname: '/yemtuketim'
+                    }}>
+                        <Card>Yem Tüketim</Card>
+                    </Link>
+                </div>
+                <div className={classes.novi__item__4}>
+                <Link to={{
+                        pathname: '/hayvankarti'
+                    }}>
+                        <Card>Hayvan Kartı</Card>
+                    </Link>
+                </div> 
             </div>
         );
     }
