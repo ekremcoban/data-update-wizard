@@ -3,21 +3,21 @@ import classes from './receiptNoInputText.scss';
 
 const ff = (props) => {
     let receiptNo = null;
-    if (props.status) {
-        receiptNo = <input type="text" 
-        className={classes.input_text}
-        onChange={props.changed}
-        value={props.status} ></input>;
-    }
-    if (!props.status) {
+    if (props.status == null) {
         receiptNo = <input type="text" 
         className={classes.input_text}
         onChange={props.changed}
         value="" ></input>;
     }
+    else {
+        receiptNo = <input type="text" 
+        className={classes.input_text}
+        onChange={props.changed}
+        value={props.status} ></input>;
+    }
     
 
-    if (props.disabled && props.receiptNumber) {
+    if (props.disabled && props.receiptNumberBlocked) {
         receiptNo = <input type="text" 
             className={`${classes.input_text} ${classes.input_text__disabled}`} 
             onChange={props.changed}
@@ -25,7 +25,7 @@ const ff = (props) => {
             disabled>
         </input>
     }
-    if (props.disabled && !props.receiptNumber) {
+    if (props.disabled && !props.receiptNumberBlocked) {
         receiptNo = <input type="text" 
             className={`${classes.input_text} ${classes.input_text__disabled}`} 
             onChange={props.changed}

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import classes from './satisFis.scss';
+import React, { Component } from "react";
+import classes from './asiTedaviFisi.scss';
 
 import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
 
@@ -14,26 +14,27 @@ import ModalUnSuccess from "../../components/modalUnSuccess/modalUnSuccess";
 import axios from '../../axios-orders';
 
 let receiptNumber, receiptNumberBlocked, integrationState, integration;
-class satisFis extends Component {
+class asiTedaviFisi extends Component {
     state = {
         data: null,
-        receiptNumber: null,
+        receiptNumber: "",
         receiptNumberBlocked: null,
         integrationState: null,
         integration: null,
         loading: false,
         error: false,
         updateButtonSuccess: false,
-        updateButtonError: false
+        updateButtonError: false, 
+        notFound: false
     }
 
     postSearchButton = async () => {
-        const post = {
+        const postfisNo = {
             fisNo: this.state.receiptNumber //  31,
         };
-        await axios.put('/novifarm/getsatisfis', post)
+        await axios.put('/novifarm/GetAsiTedaviFis', postfisNo)
             .then(async response => {
-                // console.log("----", response);
+                //console.log(response);
                 this.setState({
                     data: response.data,
                     loading: true,
@@ -41,13 +42,41 @@ class satisFis extends Component {
                 });
             })
             .catch(err => {
-                console.log(err);
+                //console.log(err);
+
                 this.setState({
-                    error: true
+                    notFound: true
                 });
                 integrationState = null;
                 integration = null;
             });
+
+        if (this.state.notFound) {
+            const postIrsaliyeNo = {
+                irsaliyeNo: this.state.receiptNumber //  31,
+            };
+            await axios.put('/novifarm/GetAsiTedaviFis', postIrsaliyeNo)
+            .then(async response => {
+                //console.log(response);
+                this.setState({
+                    data: response.data,
+                    loading: true,
+                    error: false,
+                    notFound: false
+                });
+            })
+            .catch(err => {
+                console.log(err);
+
+                this.setState({
+                    error: true,
+                    notFound: false
+                });
+                integrationState = null;
+                integration = null;
+            });
+        }
+        
 
         if (this.state.loading && !this.state.error) {
             this.setState({
@@ -58,11 +87,13 @@ class satisFis extends Component {
             });
         } else if (this.state.loading && this.state.error) {
             this.setState({
+                receiptNumber: "",
                 receiptNumberBlocked: "",
-                integrationState: "",
-                integration: ""
+                integration: "",
+                integrationState: ""
             });
         }
+
 
         // console.log(this.state.status)
     }
@@ -74,7 +105,7 @@ class satisFis extends Component {
             integrationState: this.state.integrationState
         };
 
-        await axios.put('/novifarm/updatesatisfis', post)
+        await axios.put('/novifarm/UpdateAsiTedaviFis', post)
             .then(async res => {
                 this.setState({
                     error: false,
@@ -114,11 +145,13 @@ class satisFis extends Component {
         })
     }
 
+
     receiptNumberChancedHandler = (event) => {
         this.setState({
             receiptNumber: event.target.value
         });
     }
+
 
     integrationStateChancedHandler = (event) => {
         this.setState({
@@ -136,7 +169,7 @@ class satisFis extends Component {
         if (this.state.loading && !this.state.error) {
             receiptNumberBlocked = this.state.data[0].fisNo;
             integrationState = this.state.data[0].integrationState;
-            integration = this.state.data[0].integration;
+            integration = this.state.data[0].integration;      
         }
         else if (this.state.loading && this.state.error) {
             receiptNumberBlocked = null;
@@ -145,56 +178,59 @@ class satisFis extends Component {
         }
 
         return (
-            <div className={classes.satisFis}>
-                {this.state.error && this.state.receiptNumber !== null 
+            <div className={classes.asiTedaviFisi}>
+            {this.state.error && this.state.receiptNumber !== null 
                 && !this.state.updateButtonError && !this.state.updateButtonSuccess ?
                     <ModalCancel click={this.cancelButton} >Aradığınız Numaralı Kayıt Bulunamadı!</ModalCancel> : null}
                 {!this.state.error && this.state.updateButtonSuccess ? 
                     <ModalSuccess click={this.successButton}>Güncelleme Başarılı</ModalSuccess> : null}
                 {this.state.error && this.state.updateButtonError ? 
                     <ModalUnSuccess click={this.successButton}>Güncelleme Başarısız</ModalUnSuccess> : null}
-                <div className={classes.satisFis__section_about}>
+                <div className={classes.asiTedaviFisi__section_about}>
                     <div className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>
-                            Novifarm Satış Fiş
+                            Novifarm Aşı Tedavi Fişi
                         </h2>
                     </div>
                 </div>
-                <div className={classes.satisFis__item__1}>
+                <div className={classes.asiTedaviFisi__item__0}>
+                    <span>Fiş No Giriniz</span>
+                </div>
+                <div className={classes.asiTedaviFisi__item__1}>
                     <ReceiptNoInputText
-                        placeholder="Fiş Numarasını Giriniz"
                         changed={this.receiptNumberChancedHandler}
+                        placeholder=" "
                         receiptNumber={this.state.receiptNumber}
                         delete={this.state.delete} />
                 </div>
-                <div className={classes.satisFis__item__2}>
+                <div className={classes.asiTedaviFisi__item__2}>
                     <SearchButton click={this.postSearchButton} />
                 </div>
-                <div className={classes.satisFis__item__3}>
+                <div className={classes.asiTedaviFisi__item__4}>
                     <span>IntegrationState:</span>
                 </div>
-                <div className={classes.satisFis__item__4}>
+                {/* <div className={classes.asiTedaviFisi__item__4}>
                     <span>Integration:</span>
-                </div>
-                <div className={classes.satisFis__item__5}>
+                </div> */}
+                <div className={classes.asiTedaviFisi__item__3}>
                     <span>Fiş No:</span>
                 </div>
-                <div className={classes.satisFis__item__6}>
+                <div className={classes.asiTedaviFisi__item__7}>
                     <ReceiptNoInputText
                         disabled="true"
                         receiptNumberBlocked={this.state.receiptNumberBlocked} />
                 </div>
-                <div className={classes.satisFis__item__7}>
+                <div className={classes.asiTedaviFisi__item__8}>
                     <ReceiptNoInputText
                         status={this.state.integrationState}
                         changed={this.integrationStateChancedHandler} />
                 </div>
-                <div className={classes.satisFis__item__8}>
+                {/* <div className={classes.asiTedaviFisi__item__8}>
                     <ReceiptNoInputText
                         status={this.state.integration}
                         changed={this.integrationChancedHandler} />
-                </div>
-                <div className={classes.satisFis__item__9}>
+                </div> */}
+                <div className={classes.asiTedaviFisi__item__9}>
                     <CancelButton click={this.cancelButton} />
                     <UpdateButton click={this.updateDataButton} />
                 </div>
@@ -203,4 +239,4 @@ class satisFis extends Component {
     };
 };
 
-export default satisFis;
+export default asiTedaviFisi;

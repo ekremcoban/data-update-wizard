@@ -11,6 +11,16 @@ import SatisFis from "../satisFis/satisFis";
 import StokFis from "../stokFis/stokFis";
 import YemTuketim from "../yemTuketim/yemTuketim";
 import HayvanKarti from "../hayvanKarti/hayvanKarti";
+import SutGirisFisi from "../sutGirisFisi/sutGirisFisi";
+import SutCikisFisi from "../sutCikisFisi/sutCikisFisi";
+import DogumKayitFisi from "../dogumKayitFisi/dogumKayitFisi";
+import HayvanKesimFisi from "../hayvanKesimFisi/hayvanKesimFisi";
+import OlumFisi from "../olumFisi/olumFisi";
+import HayvanGonderimFisi from "../hayvanGonderimFisi/hayvanGonderimFisi";
+import TohumlamaFisi from "../tohumlamaFisi/tohumlamaFisi";
+import GebelikKontrolKayitFisi from "../gebelikKontrolKayitFisi/gebelikKontrolKayitFisi";
+import KuruyaAyirmaFisi from "../kuruyaAyirmaFisi/kuruyaAyirmaFisi";
+import AsiTedaviFisi from "../asiTedaviFisi/asiTedaviFisi";
 
 class select extends Component {
     state = {
@@ -19,10 +29,10 @@ class select extends Component {
     };
 
     componentDidMount() {
-        axios
-            .get("/auth/getuserroles")
+        axios.get("/auth/getuserroles")
             //axios.get('/posts')
             .then(response => {
+                // console.log(response);
                 this.setState({
                     firms: response.data,
                     loading: false
@@ -75,6 +85,16 @@ class select extends Component {
                         <Route path="/stokfis" exact component={StokFis} />
                         <Route path="/yemtuketim" exact component={YemTuketim} />
                         <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route path="/sutgirisfisi" exact component={SutGirisFisi} />
+                        <Route path="/sutcikisfisi" exact component={SutCikisFisi} />
+                        <Route path="/dogumkayitfisi" exact component={DogumKayitFisi} />
+                        <Route path="/hayvankesimfisi" exact component={HayvanKesimFisi} />
+                        <Route path="/olumfisi" exact component={OlumFisi} />
+                        <Route path="/hayvangonderimfisi" exact component={HayvanGonderimFisi} />
+                        <Route path="/tohumlamafisi" exact component={TohumlamaFisi} />
+                        <Route path="/gebelikkontrolkayitfisi" exact component={GebelikKontrolKayitFisi} />
+                        <Route path="/kuruyaayirmafisi" exact component={KuruyaAyirmaFisi} />
+                        <Route path="/asitedavifisi" exact component={AsiTedaviFisi} />
                         <Route path="/" exact render={() => <Redirect to="/logo" />} 
                         />
                     </Switch>
@@ -124,6 +144,16 @@ class select extends Component {
                         <Route path="/stokfis" exact component={StokFis} />
                         <Route path="/yemtuketim" exact component={YemTuketim} />
                         <Route path="/hayvankarti" exact component={HayvanKarti} />
+                        <Route path="/sutgirisfisi" exact component={SutGirisFisi} />
+                        <Route path="/sutcikisfisi" exact component={SutCikisFisi} />
+                        <Route path="/dogumkayitfisi" exact component={DogumKayitFisi} />
+                        <Route path="/hayvankesimfisi" exact component={HayvanKesimFisi} />
+                        <Route path="/olumfisi" exact component={OlumFisi} />
+                        <Route path="/hayvangonderimfisi" exact component={HayvanGonderimFisi} />
+                        <Route path="/tohumlamafisi" exact component={TohumlamaFisi} />
+                        <Route path="/gebelikkontrolkayitfisi" exact component={GebelikKontrolKayitFisi} />
+                        <Route path="/kuruyaayirmafisi" exact component={KuruyaAyirmaFisi} />
+                        <Route path="/asitedavifisi" exact component={AsiTedaviFisi} />
                         <Route path="/" exact render={() => <Redirect to="/novifarm" />}
                         />
                     </Switch>

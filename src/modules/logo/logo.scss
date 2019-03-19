@@ -6,7 +6,8 @@
     // background-color: $color-background;
     grid-column: 2 / 11;
     grid-row: 2 / 3;
-
+    font-weight: bold;
+    
     display: grid;
     grid-template-columns: minmax(6rem, 10fr) minmax(4rem, 4fr) minmax(6rem, 6fr);
     grid-template-rows: repeat(5, 1fr);

@@ -175,6 +175,76 @@ class novi extends Component {
                         <Card>Hayvan Kartı</Card>
                     </Link>
                 </div> 
+                <div className={classes.novi__item__5}>
+                <Link to={{
+                        pathname: '/sutgirisfisi'
+                    }}>
+                        <Card>Süt Giriş Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__6}>
+                <Link to={{
+                        pathname: '/sutcikisfisi'
+                    }}>
+                        <Card>Süt Çıkış Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__7}>
+                <Link to={{
+                        pathname: '/dogumkayitfisi'
+                    }}>
+                        <Card>Doğum Kayıt Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__8}>
+                <Link to={{
+                        pathname: '/hayvankesimfisi'
+                    }}>
+                        <Card>Hayvan Kesim Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__9}>
+                <Link to={{
+                        pathname: '/olumfisi'
+                    }}>
+                        <Card>Ölüm Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__10}>
+                <Link to={{
+                        pathname: '/hayvangonderimfisi'
+                    }}>
+                        <Card>Hayvan Gönderim/ Kabul Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__11}>
+                <Link to={{
+                        pathname: '/tohumlamafisi'
+                    }}>
+                        <Card>Tohumlama Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__12}>
+                <Link to={{
+                        pathname: '/gebelikkontrolkayitfisi'
+                    }}>
+                        <Card>Gebelik Kontrol Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__13}>
+                <Link to={{
+                        pathname: '/kuruyaayirmafisi'
+                    }}>
+                        <Card>Kuruya Ayırma Fişi</Card>
+                    </Link>
+                </div> 
+                <div className={classes.novi__item__14}>
+                <Link to={{
+                        pathname: '/asitedavifisi'
+                    }}>
+                        <Card>Aşı Tedavi Fişi</Card>
+                    </Link>
+                </div> 
             </div>
         );
     }

@@ -13,18 +13,19 @@ import ModalUnSuccess from "../../components/modalUnSuccess/modalUnSuccess";
 
 import axios from '../../axios-orders';
 
-let farm, shelter, padok, commercialSystemCode, insuranceState, policyNo, policyDate;
+let nevi, shelter, padok, commercialSystemCode, insuranceState, policyNo, policyDate, gender;
 class hayvanKarti extends Component {
     state = {
         data: null,
         earringNo: null,
-        farm: null,
+        nevi: null,
         shelter: null,
         padok: null,
         commercialSystemCode: null,
         insuranceState: null,
         policyNo: null,
         policyDate: null,
+        gender: null,
         loading: false,
         error: false,
         updateButtonSuccess: false,
@@ -37,7 +38,7 @@ class hayvanKarti extends Component {
         };
         await axios.put('/novifarm/gethayvankarti', post)
             .then(async response => {
-                //console.log(response);
+                // console.log(response.data);
                 this.setState({
                     data: response.data,
                     loading: true,
@@ -49,34 +50,37 @@ class hayvanKarti extends Component {
                 this.setState({
                     error: true
                 });
-                farm = null;
+                nevi = null;
                 shelter = null;
                 padok = null;
                 commercialSystemCode = null;
                 insuranceState = null;
                 policyNo = null;
                 policyDate = null;
+                gender = null;
             });
 
         if (this.state.loading && !this.state.error) {
             this.setState({
-                farm,
+                nevi,
                 shelter,
                 padok,
                 commercialSystemCode,
                 insuranceState,
                 policyNo,
-                policyDate
+                policyDate,
+                gender
             });
         } else if (this.state.loading && this.state.error) {
             this.setState({
-                farm: "",
+                nevi: "",
                 shelter: "",
                 padok: "",
                 commercialSystemCode: "",
                 insuranceState: "",
                 policyNo: "",
-                policyDate: ""
+                policyDate: "",
+                gender: ""
             });
         }
 
@@ -85,19 +89,18 @@ class hayvanKarti extends Component {
     }
 
     updateDataButton = async () => {
-        console.log(this.state.policyDate)
         const post = {
             kupeNo: this.state.earringNo,
-            ciftlik: this.state.farm,
+            nevi: this.state.nevi,
             barinak: this.state.shelter,
             padok: this.state.padok,
             ticariSistemKodu: this.state.commercialSystemCode,
             sigortaDurumu: this.state.insuranceState,
             policeNo: this.state.policyNo,
-            policeTarihi: this.state.policyDate
+            policeTarihi: this.state.policyDate,
+            cinsiyet: this.state.gender
 
             // kupeNo: "TR161181771",
-            // farm: "2a1af32b-665d-48a6-a6eb-5cc3ad44f698",
             // barinak: "a3220ccb-101f-4a30-aa67-4289f96eee79",
             // padok: "93c5a5eb-c1f9-4d0e-a766-65e5ce60691c",
             // ticariSistemKodu: "258.TR161181771",
@@ -108,6 +111,7 @@ class hayvanKarti extends Component {
 
         await axios.put('/novifarm/updatehayvankarti', post)
             .then(async res => {
+                console.log(res.data[0])
                 this.setState({
                     error: false,
                     updateButtonSuccess: true
@@ -125,26 +129,28 @@ class hayvanKarti extends Component {
 
     cancelButton = () => {
         this.setState({
-            farm: "",
+            nevi: "",
             shelter: "",
             padok: "",
             commercialSystemCode: "",
             insuranceState: "",
             policyNo: "",
             policyDate: "",
+            gender:"",
             error: false
         })
     }
 
     successButton = () => {
         this.setState({
-            farm: "",
+            nevi: "",
             shelter: "",
             padok: "",
             commercialSystemCode: "",
             insuranceState: "",
             policyNo: "",
             policyDate: "",
+            gender: "",
             error: false,
             updateButtonSuccess: false,
             updateButtonError: false
@@ -157,9 +163,9 @@ class hayvanKarti extends Component {
         });
     }
 
-    farmChangedHandler = (event) => {
+    neviChangedHandler = (event) => {
         this.setState({
-            farm: event.target.value
+            nevi: event.target.value
         });
     }
 
@@ -199,25 +205,35 @@ class hayvanKarti extends Component {
         });
     }
 
+    genderChangeHandler = (event) => {
+        this.setState({
+            gender: event.target.value
+        });
+    }
+
 
     render() {
         if (this.state.loading && !this.state.error) {
-            farm = this.state.data[0].ciftlik;
+            nevi = this.state.data[0].nevi;
             shelter = this.state.data[0].barinak;
             padok = this.state.data[0].padok;
             commercialSystemCode = this.state.data[0].ticariSistemKodu;
             insuranceState = this.state.data[0].sigortaDurumu;
             policyNo = this.state.data[0].policeNo;
             policyDate = this.state.data[0].policeTarihi;
+            gender = this.state.data[0].cinsiyet;
+
+  
         }
         else if (this.state.loading && this.state.error) {
-            farm = null;
+            nevi = null;
             shelter = null;
             padok = null;
             commercialSystemCode = null;
             insuranceState = null;
             policyNo = null;
             policyDate = null;
+            gender = null;
         }
 
         return (
@@ -247,7 +263,7 @@ class hayvanKarti extends Component {
                         click={this.postSearchButton} />
                 </div>
                 <div className={classes.hayvanKarti__item__3}>
-                    <span>Çiftlik:</span>
+                    <span>Nevi:</span>
                 </div>
                 <div className={classes.hayvanKarti__item__4}>
                     <span>Barınak:</span>
@@ -260,8 +276,8 @@ class hayvanKarti extends Component {
                 </div>
                 <div className={classes.hayvanKarti__item__7}>
                     <ReceiptNoInputText
-                        status={this.state.farm}
-                        changed={this.farmChangedHandler} />
+                        status={this.state.nevi}
+                        changed={this.neviChangedHandler} />
                 </div>
                 <div className={classes.hayvanKarti__item__8}>
                     <ReceiptNoInputText
@@ -287,6 +303,9 @@ class hayvanKarti extends Component {
                 <div className={classes.hayvanKarti__item__13}>
                     <span>Police Tarihi:</span>
                 </div>
+                <div className={classes.hayvanKarti__item__13_1}>
+                    <span>Cinsiyet:</span>
+                </div>
                 <div className={classes.hayvanKarti__item__14}>
                     <ReceiptNoInputText
                         status={this.state.insuranceState}
@@ -303,6 +322,11 @@ class hayvanKarti extends Component {
                         changed={this.policyDateChangeHandler} />
                 </div>
                 <div className={classes.hayvanKarti__item__17}>
+                    <ReceiptNoInputText
+                        status={this.state.gender}
+                        changed={this.genderChangeHandler} />
+                </div>
+                <div className={classes.hayvanKarti__item__18}>
                     <CancelButton click={this.cancelButton} />
                     <UpdateButton click={this.updateDataButton} />
                 </div>

@@ -10,6 +10,7 @@
     display: grid;
     grid-template-columns: minmax(5rem, 5fr) minmax(3rem, 3fr) minmax(5rem, 5fr);
     grid-template-rows: repeat(7, 1fr);
+    font-weight: bold;
 
     &__section_about {
         grid-column: 1 / 4;

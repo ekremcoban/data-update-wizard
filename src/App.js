@@ -15,7 +15,7 @@ class App extends Component {
         <QueueAnim duration="2000" type="scale">
           <div key="1" className={classes.container}>
             <div key="2" className={classes.sutas}>
-              <img src={sutasLogo}/>
+              <img src={sutasLogo} alt=""/>
           </div>
             <Select />
           </div>

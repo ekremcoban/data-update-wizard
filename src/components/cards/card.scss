@@ -1,17 +1,20 @@
 @import "../../sass/abstracts/variables";
 
 .card {
-    cursor: pointer;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         font-size: 1.2rem;
         font-weight: bold;
         background-color: $color-white;
         border-radius: 1rem;
         width:90%;
-        height: 10rem;
+        height: 100%;
         margin-left: 5%;  
         box-shadow: 0 2px 2px #efefef;
-        line-height: 10rem;
+        // line-height: 2rem;
 
     &:link,
     &:visited {
