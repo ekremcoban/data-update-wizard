@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import classes from './novifarm.scss';
+import React, { Component } from "react";
+import classes from "./novifarm.scss";
 // import Options from "../../components/options/options-firms";
 // import ReceiptNoInputText from "../../components/inputTexts/receiptNoInputText";
 // import SearchButton from "../../components/buttons/searchButton";
@@ -9,7 +9,7 @@ import classes from './novifarm.scss';
 import Card from "../../components/cards/card";
 import ModalCancel from "../../components/modalCancel/modalCancel";
 import { Link } from "react-router-dom";
-import axios from '../../axios-orders';
+import axios from "../../axios-orders";
 
 let status, receiptNumberBlocked, receiptNumber;
 class novi extends Component {
@@ -21,14 +21,15 @@ class novi extends Component {
         status: null,
         loading: false,
         error: false
-    }
+    };
 
     postSearchButton = async () => {
         const post = {
             firmId: this.state.firmId, //  31,
             ficheNo: this.state.receiptNumber //"SEF2017000006439"
         };
-        await axios.put('/logo/getinvoicestatus', post)
+        await axios
+            .put("/logo/getinvoicestatus", post)
             .then(async response => {
                 // console.log(response);
                 this.setState({
@@ -59,7 +60,7 @@ class novi extends Component {
         }
 
         // console.log(this.state.status)
-    }
+    };
 
     cancelButton = () => {
         this.setState({
@@ -67,41 +68,43 @@ class novi extends Component {
             receiptNumberBlocked: "",
             status: "",
             error: false
-        })
-    }
+        });
+    };
 
-    optionChangedHandler = (event) => {
+    optionChangedHandler = event => {
         this.setState({
             firmId: event.target.value
         });
-    }
+    };
 
-    receiptNumberChancedHandler = (event) => {
+    receiptNumberChancedHandler = event => {
         this.setState({
             receiptNumber: event.target.value
         });
-    }
+    };
 
-    statusChancedHandler = (event) => {
+    statusChancedHandler = event => {
         this.setState({
             status: event.target.value
         });
-    }
+    };
 
     render() {
         if (this.state.loading && !this.state.error) {
             status = this.state.data[0].eFaturaStatus;
             receiptNumberBlocked = this.state.data[0].ficheNo;
-        }
-        else if (this.state.loading && this.state.error) {
+        } else if (this.state.loading && this.state.error) {
             status = null;
             receiptNumberBlocked = null;
         }
 
         return (
             <div className={classes.novi}>
-                {this.state.error && this.state.receiptNumber !== null ?
-                    <ModalCancel click={this.cancelButton} >Aradığınız Numaralı Kayıt Bulunamadı!</ModalCancel> : null}
+                {this.state.error && this.state.receiptNumber !== null ? (
+                    <ModalCancel click={this.cancelButton}>
+                        Aradığınız Numaralı Kayıt Bulunamadı!
+                    </ModalCancel>
+                ) : null}
                 <div className={classes.novi__section_about}>
                     <div className={classes.u_center_text}>
                         <h2 className={classes.heading_secondary}>
@@ -147,104 +150,130 @@ class novi extends Component {
                     <UpdateButton />
                 </div> */}
 
-                 <div className={classes.novi__item__1}>
-                    <Link to={{
-                        pathname: '/satisfis'
-                    }}>
+                <div className={classes.novi__item__1}>
+                    <Link
+                        to={{
+                            pathname: "/satisfis"
+                        }}
+                    >
                         <Card>Satış Fiş</Card>
                     </Link>
                 </div>
                 <div className={classes.novi__item__2}>
-                <Link to={{
-                        pathname: '/stokfis'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/stokfis"
+                        }}
+                    >
                         <Card>Stok Fiş</Card>
                     </Link>
                 </div>
                 <div className={classes.novi__item__3}>
-                <Link to={{
-                        pathname: '/yemtuketim'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/yemtuketim"
+                        }}
+                    >
                         <Card>Yem Tüketim</Card>
                     </Link>
                 </div>
                 <div className={classes.novi__item__4}>
-                <Link to={{
-                        pathname: '/hayvankarti'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/hayvankarti"
+                        }}
+                    >
                         <Card>Hayvan Kartı</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__5}>
-                <Link to={{
-                        pathname: '/sutgirisfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/sutgirisfisi"
+                        }}
+                    >
                         <Card>Süt Giriş Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__6}>
-                <Link to={{
-                        pathname: '/sutcikisfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/sutcikisfisi"
+                        }}
+                    >
                         <Card>Süt Çıkış Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__7}>
-                <Link to={{
-                        pathname: '/dogumkayitfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/dogumkayitfisi"
+                        }}
+                    >
                         <Card>Doğum Kayıt Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__8}>
-                <Link to={{
-                        pathname: '/hayvankesimfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/hayvankesimfisi"
+                        }}
+                    >
                         <Card>Hayvan Kesim Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__9}>
-                <Link to={{
-                        pathname: '/olumfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/olumfisi"
+                        }}
+                    >
                         <Card>Ölüm Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__10}>
-                <Link to={{
-                        pathname: '/hayvangonderimfisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/hayvangonderimfisi"
+                        }}
+                    >
                         <Card>Hayvan Gönderim/ Kabul Fişi</Card>
                     </Link>
-                </div> 
+                </div>
                 <div className={classes.novi__item__11}>
-                <Link to={{
-                        pathname: '/tohumlamafisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/tohumlamafisi"
+                        }}
+                    >
                         <Card>Tohumlama Fişi</Card>
                     </Link>
-                </div> 
-                <div className={classes.novi__item__12}>
+                </div>
+                {/* <div className={classes.novi__item__12}>
                 <Link to={{
                         pathname: '/gebelikkontrolkayitfisi'
                     }}>
                         <Card>Gebelik Kontrol Fişi</Card>
                     </Link>
-                </div> 
+                </div>  */}
                 <div className={classes.novi__item__13}>
-                <Link to={{
-                        pathname: '/kuruyaayirmafisi'
-                    }}>
+                    <Link
+                        to={{
+                            pathname: "/kuruyaayirmafisi"
+                        }}
+                    >
                         <Card>Kuruya Ayırma Fişi</Card>
                     </Link>
-                </div> 
-                <div className={classes.novi__item__14}>
-                <Link to={{
-                        pathname: '/asitedavifisi'
-                    }}>
+                </div>
+                <div className={classes.novi__item__12}>
+                    <Link
+                        to={{
+                            pathname: "/asitedavifisi"
+                        }}
+                    >
                         <Card>Aşı Tedavi Fişi</Card>
                     </Link>
-                </div> 
+                </div>
             </div>
         );
     }
