@@ -290,6 +290,9 @@ module.exports = function (webpackEnv) {
         PnpWebpackPlugin.moduleLoader(module),
       ],
     },
+    externals: {
+      'Config': isEnvDevelopment ? JSON.stringify(require('./config.dev.json')) : JSON.stringify(require('./config.prod.json'))
+    },
     module: {
       strictExportPresence: true,
       rules: [

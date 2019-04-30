@@ -8,7 +8,7 @@
     display: grid;
 }
 
-.img__logo {
+.img__first {
     width: 100%;
     opacity: .75;
 
@@ -22,7 +22,16 @@
     opacity: 1;
 }
 
-.img__novifarm {
+.img__second {
+    width: 100%;
+    opacity: .75;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.img__third {
     width: 100%;
     opacity: .75;
 
@@ -39,20 +48,20 @@
     grid-template-rows: 1fr 3fr;
     grid-column-gap: $gap;
 
-    &__a__logo {
+    &__a__first {
         grid-column: 2 / 3;
         grid-row: 1 / 2;
         margin-top: 2rem;
     }
 
-    &__a__novifarm {
+    &__a__second {
         grid-column: 3 / 4;
         grid-row: 1 / 2;
         margin-top: 2rem;
     }
-
-    &__a__novifarm__1 {
-        grid-column: 2 / 3;
+    
+    &__a__third {
+        grid-column: 4 / 5;
         grid-row: 1 / 2;
         margin-top: 2rem;
     }
@@ -61,14 +70,20 @@
         .home {
             // grid-template-rows: 1fr 3fr 1fr;
 
-            &__a__logo {
+            &__a__first {
                 grid-column: 2 / 4;
                 grid-row: 1 / 2;
                 margin-top: 1rem;
             }
         
-            &__a__novifarm {
+            &__a__second {
                 grid-column: 4 / 6;
+                grid-row: 1 / 2;
+                margin-top: 1rem;
+            }
+        
+            &__a__third {
+                grid-column: 6 / 8;
                 grid-row: 1 / 2;
                 margin-top: 1rem;
             }
@@ -79,64 +94,65 @@
         .home {
             // grid-template-rows: 1fr 3fr 1fr;
 
-            &__a__logo {
+            &__a__first {
                 grid-column: 2 / 4;
                 grid-row: 1 / 2;
                 margin-top: 1rem;
             }
         
-            &__a__novifarm {
+            &__a__second {
                 grid-column: 4 / 6;
                 grid-row: 1 / 2;
                 margin-top: 1rem;
             }
 
-            &__a__novifarm__1 {
-                grid-column: 2 / 4;
+            &__a__third {
+                grid-column: 6 / 8;
                 grid-row: 1 / 2;
                 margin-top: 1rem;
             }
+
         }
     }
 
     @media only screen and (max-width: 768px) {
-        &__a__logo {
+        &__a__first {
             height: 50%;
             grid-column: 2 / 4;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }
     
-        &__a__novifarm {
+        &__a__second {
             height: 50%;
             grid-column: 4 / 6;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }
 
-        &__a__novifarm__1 {
+        &__a__third {
             height: 50%;
-            grid-column: 2 / 4;
+            grid-column: 6 / 8;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }
     }
 
     @media only screen and (max-width:600px) {
-        &__a__logo {
+        &__a__first {
             grid-column: 2 / 5;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }
     
-        &__a__novifarm {
+        &__a__second {
             grid-column: 5 / 8;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }
 
-        &__a__novifarm__1 {
-            grid-column: 2 / 5;
+        &__a__third {
+            grid-column: 8 / 11;
             grid-row: 1 / 2;
             margin-top: 3rem;
         }

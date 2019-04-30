@@ -1,0 +1,8 @@
+{
+    "apiURL": "http://sutasiis:8035/duw/",
+    "file": {
+        "limitPerFile": 4194304,
+        "limitTotal": 12582912,
+        "acceptedFiles": ".xls, .xlsx"
+    }
+}

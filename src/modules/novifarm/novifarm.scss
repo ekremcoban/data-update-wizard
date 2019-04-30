@@ -10,7 +10,7 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(7, minmax(7rem, 7fr));
-    grid-template-rows: minmax(1rem, 1fr) repeat(5, minmax(2rem, 2fr));
+    grid-template-rows: minmax(1rem, 1fr) repeat(4, minmax(2rem, 2fr));
     // grid-gap: 1.5rem;
 
     &__section_about {
