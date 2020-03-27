@@ -1,5 +1,5 @@
 {
-    "apiURL": "http://sutasiis:8035/duw/",
+    "apiURL": "http://bla:blablabla",
     "file": {
         "limitPerFile": 4194304,
         "limitTotal": 12582912,
